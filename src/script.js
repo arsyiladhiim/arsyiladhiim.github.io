@@ -132,41 +132,36 @@
         
         // Project Modal Functions
         const projectData = {
-            ecommerce: {
-                title: "E-Commerce Platform",
-                subtitle: "Full-Stack Web Application • 2023",
-                description: "A comprehensive e-commerce solution built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment processing, and admin dashboard.",
-                technologies: ["React", "Node.js", "MongoDB", "Stripe API", "JWT", "Tailwind CSS"],
-                features: [
-                    "User registration and authentication",
-                    "Product catalog with search and filters",
-                    "Shopping cart and wishlist functionality",
-                    "Secure payment processing with Stripe",
-                    "Order tracking and history",
-                    "Admin dashboard for inventory management",
-                    "Responsive design for all devices",
-                    "Email notifications for orders"
-                ],
-                challenges: "Implementing secure payment processing and creating an intuitive admin interface for inventory management.",
-                outcome: "Successfully deployed with 99.9% uptime, handling 1000+ daily transactions with positive user feedback."
-            },
-            banking: {
-                title: "Mobile Banking App",
-                subtitle: "React Native Application • 2023",
-                description: "A secure mobile banking application with biometric authentication, real-time transactions, and comprehensive financial management tools.",
+            chatbotwhatsapp: {
+                title: "Chatbot-AI WhatsApp",
+                subtitle: "NodeJS CLI Application • 2023",
+                description: "An AI WhatsApp chatbot is a virtual assistant integrated with WhatsApp that uses artificial intelligence to interact with users automatically. It can understand questions, provide instant responses, and perform tasks without human intervention.",
                 technologies: ["React Native", "Firebase", "Biometric API", "Redux", "Node.js", "PostgreSQL"],
                 features: [
-                    "Biometric authentication (fingerprint/face)",
-                    "Real-time balance and transaction updates",
-                    "Money transfer between accounts",
-                    "Bill payment and scheduling",
-                    "Transaction history and analytics",
-                    "Push notifications for activities",
-                    "Offline mode for basic features",
-                    "Multi-language support"
+                    "24/7 Automated Replies",
+                    "Natural Language Understanding (NLU)",
+                    "Multi-Language Support",
+                    "Personalized Responses",
+                    "Order & Booking Management",
+                    "Analytics & Reporting"
                 ],
-                challenges: "Ensuring bank-level security while maintaining user-friendly interface and implementing biometric authentication across different devices.",
-                outcome: "Achieved 4.8/5 app store rating with 50,000+ downloads and zero security incidents reported."
+                challenges: "Handling diverse customer queries in multiple languages while ensuring fast response times, seamless CRM integration, and maintaining user trust in data privacy.",
+                outcome: "Successfully automated 70% of customer inquiries, reduced average response time from hours to seconds, achieved 4.6/5 user satisfaction rating, and increased lead conversions by 35%."
+            },
+            systempraktikum: {
+                title: "System Praktikum Laboratorium",
+                subtitle: "Full-Stack Web Application • 2018",
+                description: "A practicum submission system is a web-based platform designed for students to submit their practicum (lab/assignment) reports and for lecturers to manage, review, and grade them.",
+                technologies: ["CodeIgnitier", "Bootstrap CSS", "MySQL", "Javascript"],
+                features: [
+                    "Studen Portal - Upload reports, track deadlines, view submission status",
+                    "Lecturer Dashboard - Download, review, grade",
+                    "Secure Storage - All submissions stored in a centralized database",
+                    "Role-based Access - Different permissions for students, lecturers, and admins",
+                    "Report History - Archive of past practicum submissions for reference"
+                ],
+                challenges: "Preventing plagiarism and duplicate submissions - Integrating grading and feedback seamlessly into the system",
+                outcome: "Streamlined submission process with 100% digital workflow (no paper needed)."
             },
             analytics: {
                 title: "Analytics Dashboard",
