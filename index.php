@@ -263,6 +263,11 @@
                     <div class="bg-gray-800 rounded-lg p-4 sm:p-6 lg:p-8">
                         <form id="contactForm" action="https://formspree.io/f/mzzajqbp" method="POST">
                             <div class="mb-4 sm:mb-6">
+                                <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base">
+                            </div>
+                            
+                            <div class="mb-4 sm:mb-6">
                                 <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
                                 <input type="email" id="email" name="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base">
                             </div>
