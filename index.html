@@ -1,11 +1,11 @@
-k<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M. Aryil Adhi'im - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs9.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body class="bg-black text-white min-h-screen overflow-x-hidden">
@@ -23,41 +23,45 @@ k<!DOCTYPE html>
 
     <!-- Navigation -->
     <nav class="fixed top-0 right-0 left-16 sm:left-20 bg-black bg-opacity-95 backdrop-blur-sm z-40 p-4 sm:p-6">
-  <div class="flex justify-between items-center">
-    
-    <!-- Logo -->
-    <div class="text-xl sm:text-2xl font-bold text-gray-400 tracking-wide ml-6 sm:ml-10">
-      MARS
-    </div>
+        <div class="flex justify-between items-center">
 
-    <!-- Desktop Navigation -->
-    <div class="desktop-nav hidden md:flex space-x-6 lg:space-x-10">
-      <a href="#" onclick="showPage('home')" class="nav-link home-link text-gray-300 hover:text-white transition duration-300">Home</a>
-      <a href="#" onclick="showPage('about')" class="nav-link about-link text-gray-300 hover:text-white transition duration-300">About</a>
-      <a href="#" onclick="showPage('complete')" class="nav-link complete-link text-gray-300 hover:text-white transition duration-300">Projects</a>
-      <a href="#" onclick="showPage('ongoing')" class="nav-link ongoing-link text-gray-300 hover:text-white transition duration-300">Ongoing</a>
-      <a href="#" onclick="showPage('contact')" class="nav-link contact-link text-gray-300 hover:text-white transition duration-300">Contact</a>
-    </div>
+            <!-- Logo -->
+            <div class="text-xl sm:text-2xl font-bold text-gray-400 tracking-wide ml-6 sm:ml-10">MARS</div>
 
-    <!-- Mobile Hamburger -->
-    <div class="md:hidden flex flex-col space-y-1 cursor-pointer" onclick="toggleMobileNav()">
-      <span class="w-6 h-0.5 bg-gray-300"></span>
-      <span class="w-6 h-0.5 bg-gray-300"></span>
-      <span class="w-6 h-0.5 bg-gray-300"></span>
-    </div>
-  </div>
-</nav>
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav hidden md:flex space-x-6 lg:space-x-10">
+            <a href="#" onclick="showPage('home')" class="nav-link home-link text-gray-300 hover:text-white transition duration-300">Home</a>
+            <a href="#" onclick="showPage('about')" class="nav-link about-link text-gray-300 hover:text-white transition duration-300">About</a>
+            <a href="#" onclick="showPage('complete')" class="nav-link complete-link text-gray-300 hover:text-white transition duration-300">Projects</a>
+            <a href="#" onclick="showPage('ongoing')" class="nav-link ongoing-link text-gray-300 hover:text-white transition duration-300">Ongoing</a>
+            <a href="#" onclick="showPage('contact')" class="nav-link contact-link text-gray-300 hover:text-white transition duration-300">Contact</a>
+            </div>
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav">
-        <div class="flex flex-col items-center justify-center h-full space-y-8">
-            <a href="#" onclick="showPage('home'); toggleMobileNav()" class="nav-link home-link text-2xl sm:text-3xl text-gray-500 hover:text-gray-400 transition-colors duration-300">Home</a>
-            <a href="#" onclick="showPage('about'); toggleMobileNav()" class="nav-link about-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">About</a>
-            <a href="#" onclick="showPage('complete'); toggleMobileNav()" class="nav-link complete-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">Projects</a>
-            <a href="#" onclick="showPage('ongoing'); toggleMobileNav()" class="nav-link ongoing-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">Ongoing</a>
-            <a href="#" onclick="showPage('contact'); toggleMobileNav()" class="nav-link contact-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">Contact</a>
+            <!-- Mobile Hamburger -->
+            <div class="md:hidden flex flex-col space-y-1 cursor-pointer" onclick="toggleMobileNav()">
+            <span class="w-6 h-0.5 bg-gray-300"></span>
+            <span class="w-6 h-0.5 bg-gray-300"></span>
+            <span class="w-6 h-0.5 bg-gray-300"></span>
+            </div>
         </div>
-    </div>
+    </nav>
+
+        <!-- Mobile Navigation (slide in/out) -->
+        <div id="mobileNav" class="fixed inset-0 bg-black bg-opacity-95 z-50 flex flex-col items-center justify-center space-y-8 text-lg font-semibold text-gray-300 transform translate-x-full transition-transform duration-300 ease-in-out">
+
+            <!-- Close Button -->
+            <button onclick="toggleMobileNav()" class="absolute top-5 right-5 text-gray-300 hover:text-white text-3xl">
+                &times;
+            </button>
+
+            <!-- Menu Items -->
+            <a href="#" onclick="showPage('home'); toggleMobileNav()" class="nav-link home-link text-2xl sm:text-3xl text-gray-300 hover:text-white transition-colors duration-300">Home</a>
+            <a href="#" onclick="showPage('about'); toggleMobileNav()" class="nav-link about-link text-2xl sm:text-3xl text-gray-300 hover:text-white transition-colors duration-300">About</a>
+            <a href="#" onclick="showPage('complete'); toggleMobileNav()" class="nav-link complete-link text-2xl sm:text-3xl text-gray-300 hover:text-white transition-colors duration-300">Projects</a>
+            <a href="#" onclick="showPage('ongoing'); toggleMobileNav()" class="nav-link ongoing-link text-2xl sm:text-3xl text-gray-300 hover:text-white transition-colors duration-300">Ongoing</a>
+            <a href="#" onclick="showPage('contact'); toggleMobileNav()" class="nav-link contact-link text-2xl sm:text-3xl text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
+        </div>
+
 
     <!-- Main Content -->
     <main class="main-content ml-16 sm:ml-20 pt-16 sm:pt-24 min-h-screen">
@@ -65,13 +69,14 @@ k<!DOCTYPE html>
         <div id="home" class="page active">
             <div class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-4xl w-full">
-                    <h1 class="text-responsive-xl font-bold mb-4 sm:mb-6 leading-tight">
-                        M. Arsyil <span class="text-gray-500">Adhi'im</span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight whitespace-nowrap 
+                            text-gray-100 animate-about-glow">
+                    M. Arsyil <span class="text-gray-500">Adhi'im</span>
                     </h1>
                     <h2 class="text-responsive-lg text-gray-400 mb-6 sm:mb-8">
                         I love <span id="typing-text" class="typing-animation text-gray-500"></span>
                     </h2>
-                    <p class="text-base sm:text-lg text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-4">
+                    <p class="text-base sm:text-lg text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-4 text-justify">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
@@ -88,44 +93,60 @@ k<!DOCTYPE html>
 
         <!-- About Page -->
         <div id="about" class="page">
-            <div class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-8">
-                <div class="max-w-4xl w-full">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">About <span class="text-gray-500">Me</span></h1>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                        <div class="order-2 lg:order-1">
-                            <div class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-gray-500 to-gray-700 rounded-full mx-auto mb-6 sm:mb-8 flex items-center justify-center">
-                                <i class="fas fa-user text-4xl sm:text-6xl lg:text-8xl text-white"></i>
-                            </div>
-                        </div>
-                        <div class="order-1 lg:order-2">
-                            <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                                IT graduate with 3+ years of experience in IT Support, Web Development,
-                                and Networking. Skilled in troubleshooting, system maintenance, and web
-                                programming. Strong interest in IT infrastructure and continuous learning in
-                                technology.
-                            </p>
-                            <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
-                                My journey in technology started with a curiosity about how things work, and it has evolved into a career dedicated to building innovative applications.
-                            </p>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="bg-gray-800 p-4 rounded-lg">
-                                    <h3 class="text-gray-400 font-semibold mb-2">Frontend</h3>
-                                    <p class="text-gray-300 text-sm">HTML, React, Tailwilnd, JavaScript</p>
-                                </div>
-                                <div class="bg-gray-800 p-4 rounded-lg">
-                                    <h3 class="text-gray-400 font-semibold mb-2">Backend</h3>
-                                    <p class="text-gray-300 text-sm">Node.js, PHP</p>
-                                </div>
-                                <div class="bg-gray-800 p-4 rounded-lg">
-                                    <h3 class="text-gray-400 font-semibold mb-2">Framework</h3>
-                                    <p class="text-gray-300 text-sm">CodeIgnitier, Laravel</p>
-                                </div>
-                            </div>
-                        </div>
+        <div class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-8">
+            <div class="w-full max-w-6xl"> 
+            
+            <!-- Judul -->
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center lg:text-left">
+                About <span class="text-gray-500">Me</span>
+            </h1>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+                
+                <!-- Avatar -->
+                <div class="order-1 lg:order-1 flex justify-center lg:justify-start">
+                <div class="w-32 h-32 sm:w-48 sm:h-48 lg:w-72 lg:h-72 
+                            bg-gradient-to-br from-gray-500 to-gray-700 
+                            rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl sm:text-5xl lg:text-7xl text-white"></i>
+                </div>
+                </div>
+
+                <!-- Text -->
+                <div class="order-2 lg:order-2 text-left">
+                <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-4 text-justify">
+                    IT graduate with 3+ years of experience in IT Support, Web Development,
+                    and Networking. Skilled in troubleshooting, system maintenance, and web
+                    programming. Strong interest in IT infrastructure and continuous learning in
+                    technology.
+                </p>
+                <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 text-justify">
+                    My journey in technology started with a curiosity about how things work, and it has evolved into a career dedicated to building innovative applications.
+                </p>
+
+                <!-- Skills -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                    <h3 class="text-gray-400 font-semibold mb-2">Frontend</h3>
+                    <p class="text-gray-300 text-sm">HTML, React, Tailwind, JavaScript</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                    <h3 class="text-gray-400 font-semibold mb-2">Backend</h3>
+                    <p class="text-gray-300 text-sm">Node.js, PHP</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg sm:col-span-2 lg:col-span-1">
+                    <h3 class="text-gray-400 font-semibold mb-2">Framework</h3>
+                    <p class="text-gray-300 text-sm">CodeIgniter, Laravel</p>
                     </div>
                 </div>
+                </div>
+
+            </div>
             </div>
         </div>
+        </div>
+
 
         <!-- Complete Projects Page -->
         <div id="complete" class="page">
@@ -133,7 +154,7 @@ k<!DOCTYPE html>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-16 text-center">Complete <span class="text-gray-500">Projects</span></h1>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
                     
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('banking')">
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('chatbotwhatsapp')">
                         <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
                             <i class="fas fa-mobile-alt text-3xl sm:text-6xl text-white"></i>
                         </div>
@@ -152,50 +173,6 @@ k<!DOCTYPE html>
                         <div class="p-4 sm:p-6">
                             <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">System Praktikum Laboratorium</h3>
                             <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">A practicum submission system is a web-based platform</p>
-                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('analytics')">
-                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center">
-                            <i class="fas fa-chart-line text-3xl sm:text-6xl text-white"></i>
-                        </div>
-                        <div class="p-4 sm:p-6">
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Analytics Dashboard</h3>
-                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Real-time analytics dashboard with interactive charts and reports.</p>
-                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('gaming')">
-                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
-                            <i class="fas fa-gamepad text-3xl sm:text-6xl text-white"></i>
-                        </div>
-                        <div class="p-4 sm:p-6">
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Gaming Platform</h3>
-                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Multiplayer gaming platform with real-time chat and tournaments.</p>
-                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('learning')">
-                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center">
-                            <i class="fas fa-graduation-cap text-3xl sm:text-6xl text-white"></i>
-                        </div>
-                        <div class="p-4 sm:p-6">
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Learning Management</h3>
-                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Online learning platform with video streaming and progress tracking.</p>
-                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('sustainability')">
-                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
-                            <i class="fas fa-leaf text-3xl sm:text-6xl text-white"></i>
-                        </div>
-                        <div class="p-4 sm:p-6">
-                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Sustainability Tracker</h3>
-                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Environmental impact tracking app with carbon footprint calculator.</p>
                             <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
                         </div>
                     </div>
@@ -280,10 +257,9 @@ k<!DOCTYPE html>
                         </button>
                         </form>
                         <!-- Toast Container -->
-                        <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
+                        <div id="toastContainer" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center space-y-3"></div>
 
                         <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-700">
-
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
                                 <div class="mb-4 sm:mb-0">
                                     <i class="fas fa-envelope text-xl sm:text-2xl text-gray-500"></i>
@@ -305,7 +281,6 @@ k<!DOCTYPE html>
                                         <p class="text-gray-300 text-sm sm:text-base">East Java, Sidoarjo</p>
                                     </a>
                                 </div>
-
                             </div>
                         </div>
 

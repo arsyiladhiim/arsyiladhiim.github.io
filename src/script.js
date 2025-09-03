@@ -162,78 +162,6 @@
                 ],
                 challenges: "Preventing plagiarism and duplicate submissions - Integrating grading and feedback seamlessly into the system",
                 outcome: "Streamlined submission process with 100% digital workflow (no paper needed)."
-            },
-            analytics: {
-                title: "Analytics Dashboard",
-                subtitle: "Data Visualization Platform • 2023",
-                description: "A real-time analytics dashboard providing interactive charts, reports, and insights for business intelligence and data-driven decision making.",
-                technologies: ["Vue.js", "D3.js", "Chart.js", "Python", "FastAPI", "Redis", "WebSocket"],
-                features: [
-                    "Real-time data visualization",
-                    "Interactive charts and graphs",
-                    "Custom report generation",
-                    "Data filtering and segmentation",
-                    "Export functionality (PDF, Excel)",
-                    "User role-based access control",
-                    "Automated alert system",
-                    "Mobile-responsive design"
-                ],
-                challenges: "Processing large datasets in real-time while maintaining smooth user experience and creating intuitive data visualizations.",
-                outcome: "Reduced report generation time by 80% and improved decision-making speed for 200+ business users."
-            },
-            gaming: {
-                title: "Gaming Platform",
-                subtitle: "Multiplayer Web Application • 2023",
-                description: "A comprehensive gaming platform featuring multiplayer games, real-time chat, tournaments, and social features for gaming communities.",
-                technologies: ["Socket.io", "Express.js", "MongoDB", "WebRTC", "Canvas API", "JWT"],
-                features: [
-                    "Real-time multiplayer gameplay",
-                    "Live chat and voice communication",
-                    "Tournament creation and management",
-                    "Player ranking and leaderboards",
-                    "Friend system and social features",
-                    "Game replay and statistics",
-                    "Custom game rooms",
-                    "Anti-cheat detection system"
-                ],
-                challenges: "Implementing low-latency real-time communication for smooth gameplay and preventing cheating in competitive matches.",
-                outcome: "Hosted 100+ tournaments with 10,000+ registered players and 95% positive community feedback."
-            },
-            learning: {
-                title: "Learning Management System",
-                subtitle: "Educational Platform • 2023",
-                description: "An online learning platform with video streaming, progress tracking, interactive quizzes, and comprehensive course management tools.",
-                technologies: ["Next.js", "Prisma", "PostgreSQL", "AWS S3", "Stripe", "WebRTC"],
-                features: [
-                    "HD video streaming with adaptive quality",
-                    "Interactive quizzes and assignments",
-                    "Progress tracking and analytics",
-                    "Live virtual classrooms",
-                    "Course creation tools for instructors",
-                    "Certificate generation",
-                    "Discussion forums and Q&A",
-                    "Mobile app companion"
-                ],
-                challenges: "Optimizing video streaming for different connection speeds and creating engaging interactive learning experiences.",
-                outcome: "Served 5,000+ students across 50+ courses with 92% completion rate and excellent instructor feedback."
-            },
-            sustainability: {
-                title: "Sustainability Tracker",
-                subtitle: "Environmental Impact App • 2023",
-                description: "An environmental impact tracking application with carbon footprint calculator, sustainability goals, and community challenges.",
-                technologies: ["Flutter", "Firebase", "Google Maps API", "Chart.js", "Node.js", "MongoDB"],
-                features: [
-                    "Carbon footprint calculation",
-                    "Daily sustainability tracking",
-                    "Eco-friendly habit suggestions",
-                    "Community challenges and rewards",
-                    "Local environmental data integration",
-                    "Progress visualization and reports",
-                    "Social sharing and competitions",
-                    "Educational content and tips"
-                ],
-                challenges: "Accurately calculating carbon footprints from various activities and motivating users to maintain sustainable habits.",
-                outcome: "Helped 25,000+ users reduce their carbon footprint by an average of 30% within 6 months of usage."
             }
         };
         
@@ -323,3 +251,8 @@
         });
 
 (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97931f339406959b',t:'MTc1Njg4MDIyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+function toggleMobileNav() {
+    const nav = document.getElementById("mobileNav");
+    nav.classList.toggle("translate-x-full");
+    nav.classList.toggle("translate-x-0");
+  }
