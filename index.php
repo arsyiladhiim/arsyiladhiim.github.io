@@ -261,7 +261,7 @@
                 <div class="max-w-2xl w-full">
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">Get In <span class="text-gray-500">Touch</span></h1>
                     <div class="bg-gray-800 rounded-lg p-4 sm:p-6 lg:p-8">
-                        <form id="contactForm" action="https://formspree.io/f/maypkwzd" method="POST">
+                        <form id="contactForm" action="https://formspree.io/f/mzzajqbp" method="POST">
                             <div class="mb-4 sm:mb-6">
                                 <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
                                 <input 
