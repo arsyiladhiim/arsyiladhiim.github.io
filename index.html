@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+k<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M. Aryil Adhi'im - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs9.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body class="bg-black text-white min-h-screen overflow-x-hidden">
@@ -23,26 +23,30 @@
 
     <!-- Navigation -->
     <nav class="fixed top-0 right-0 left-16 sm:left-20 bg-black bg-opacity-95 backdrop-blur-sm z-40 p-4 sm:p-6">
-        <div class="flex justify-between items-center">
-            <div class="text-xl sm:text-2xl font-bold text-gray-500">MARS</div>
-            
-            <!-- Desktop Navigation -->
-            <div class="desktop-nav flex space-x-6 lg:space-x-8">
-                <a href="#" onclick="showPage('home')" class="nav-link home-link text-gray-500 hover:text-gray-400 transition-colors duration-300">Home</a>
-                <a href="#" onclick="showPage('about')" class="nav-link about-link text-gray-300 hover:text-gray-500 transition-colors duration-300">About</a>
-                <a href="#" onclick="showPage('complete')" class="nav-link complete-link text-gray-300 hover:text-gray-500 transition-colors duration-300">Projects</a>
-                <a href="#" onclick="showPage('ongoing')" class="nav-link ongoing-link text-gray-300 hover:text-gray-500 transition-colors duration-300">Ongoing</a>
-                <a href="#" onclick="showPage('contact')" class="nav-link contact-link text-gray-300 hover:text-gray-500 transition-colors duration-300">Contact</a>
-            </div>
-            
-            <!-- Mobile Hamburger -->
-            <div class="hamburger" onclick="toggleMobileNav()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <div class="flex justify-between items-center">
+    
+    <!-- Logo -->
+    <div class="text-xl sm:text-2xl font-bold text-gray-400 tracking-wide ml-6 sm:ml-10">
+      MARS
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav hidden md:flex space-x-6 lg:space-x-10">
+      <a href="#" onclick="showPage('home')" class="nav-link home-link text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="#" onclick="showPage('about')" class="nav-link about-link text-gray-300 hover:text-white transition duration-300">About</a>
+      <a href="#" onclick="showPage('complete')" class="nav-link complete-link text-gray-300 hover:text-white transition duration-300">Projects</a>
+      <a href="#" onclick="showPage('ongoing')" class="nav-link ongoing-link text-gray-300 hover:text-white transition duration-300">Ongoing</a>
+      <a href="#" onclick="showPage('contact')" class="nav-link contact-link text-gray-300 hover:text-white transition duration-300">Contact</a>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <div class="md:hidden flex flex-col space-y-1 cursor-pointer" onclick="toggleMobileNav()">
+      <span class="w-6 h-0.5 bg-gray-300"></span>
+      <span class="w-6 h-0.5 bg-gray-300"></span>
+      <span class="w-6 h-0.5 bg-gray-300"></span>
+    </div>
+  </div>
+</nav>
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav">
