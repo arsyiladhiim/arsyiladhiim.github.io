@@ -261,26 +261,101 @@
                 <div class="max-w-2xl w-full">
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">Get In <span class="text-gray-500">Touch</span></h1>
                     <div class="bg-gray-800 rounded-lg p-4 sm:p-6 lg:p-8">
-                        <form id="contactForm" action="https://formspree.io/f/mzzajqbp" method="POST">
+                        <form id="contactForm" action="https://formspree.io/f/maypkwzd" method="POST">
                             <div class="mb-4 sm:mb-6">
                                 <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
-                                <input type="text" id="name" name="name" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base">
+                                <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required 
+                                class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base"
+                                >
                             </div>
                             
                             <div class="mb-4 sm:mb-6">
                                 <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
-                                <input type="email" id="email" name="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base">
+                                <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required 
+                                class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base"
+                                >
                             </div>
                             
                             <div class="mb-4 sm:mb-6">
                                 <label for="message" class="block text-gray-300 text-sm font-semibold mb-2">Message</label>
-                                <textarea id="message" name="message" rows="4" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 resize-none text-sm sm:text-base"></textarea>
+                                <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="4" 
+                                required 
+                                class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 resize-none text-sm sm:text-base"
+                                ></textarea>
                             </div>
                             
-                            <button type="submit" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                            <button 
+                                type="submit" 
+                                class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+                            >
                                 Send Message
                             </button>
                         </form>
+
+                        <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
+                        <script>
+                            function showToast(message, type = "success") {
+                            const container = document.getElementById("toastContainer");
+                            const toast = document.createElement("div");
+
+                            const baseClasses = "px-4 py-3 rounded-lg shadow-lg text-white transform transition-all duration-500";
+                            const typeClasses = type === "success" 
+                                ? "bg-green-600" 
+                                : "bg-red-600";
+
+                            toast.className = baseClasses + " " + typeClasses + " translate-x-full opacity-0";
+                            toast.innerHTML = message;
+
+                            container.appendChild(toast);
+
+                            // Trigger animation masuk
+                            setTimeout(() => {
+                                toast.classList.remove("translate-x-full", "opacity-0");
+                                toast.classList.add("translate-x-0", "opacity-100");
+                            }, 100);
+
+                            // Hilangkan toast setelah 4 detik
+                            setTimeout(() => {
+                                toast.classList.remove("translate-x-0", "opacity-100");
+                                toast.classList.add("translate-x-full", "opacity-0");
+                                setTimeout(() => toast.remove(), 500); // hapus dari DOM setelah animasi
+                            }, 4000);
+                            }
+
+                            document.getElementById("contactForm").addEventListener("submit", async function(e) {
+                            e.preventDefault();
+
+                            const form = e.target;
+
+                            try {
+                                const response = await fetch(form.action, {
+                                method: form.method,
+                                body: new FormData(form),
+                                headers: { 'Accept': 'application/json' }
+                                });
+
+                                if (response.ok) {
+                                showToast("✅ Message sent successfully!", "success");
+                                form.reset();
+                                } else {
+                                showToast("❌ Oops, something went wrong. Please try again.", "error");
+                                }
+                            } catch (error) {
+                                showToast("❌ Network error. Please try again later.", "error");
+                            }
+                            });
+                        </script>
                         
                         <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-700">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
