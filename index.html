@@ -1,1 +1,932 @@
-Hallo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid #6b7280;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #6b7280; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        .slide-enter {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        
+        .slide-enter-active {
+            transform: translateX(0);
+            opacity: 1;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .slide-exit {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .slide-exit-active {
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.98);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .mobile-nav.active {
+            left: 0;
+        }
+        
+        .desktop-nav {
+            display: none;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #6b7280;
+        }
+        
+        /* Mobile optimizations */
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: none;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 320px) {
+            .sidebar {
+                width: 60px;
+            }
+            
+            .main-content {
+                margin-left: 60px;
+            }
+        }
+        
+        /* Small devices */
+        @media (max-width: 480px) {
+            .text-responsive-xl {
+                font-size: 2.5rem;
+            }
+            
+            .text-responsive-lg {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Medium devices */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .text-responsive-xl {
+                font-size: 3.5rem;
+            }
+            
+            .text-responsive-lg {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Large devices */
+        @media (min-width: 769px) {
+            .text-responsive-xl {
+                font-size: 5rem;
+            }
+            
+            .text-responsive-lg {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: #1f2937;
+            margin: 20px;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            position: relative;
+            padding: 24px 24px 16px 24px;
+            border-bottom: 1px solid #374151;
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            color: #9ca3af;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+        
+        .close:hover {
+            color: #f3f4f6;
+        }
+        
+        .tech-tag {
+            background: #374151;
+            color: #d1d5db;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: #d1d5db;
+        }
+        
+        .feature-item i {
+            color: #6b7280;
+            margin-top: 2px;
+            font-size: 12px;
+        }
+        
+        /* Mobile modal adjustments */
+        @media (max-width: 640px) {
+            .modal-content {
+                margin: 10px;
+                width: calc(100% - 20px);
+                max-height: 95vh;
+            }
+            
+            .modal-header {
+                padding: 20px 20px 12px 20px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .close {
+                top: 12px;
+                right: 16px;
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen overflow-x-hidden">
+    <!-- Sidebar -->
+    <div class="sidebar fixed left-0 top-0 h-full w-16 sm:w-20 bg-gray-900 flex flex-col items-center justify-center z-50">
+        <div class="flex flex-col space-y-4 sm:space-y-6">
+            <a href="#" class="social-icon text-gray-400 hover:text-blue-500 text-lg sm:text-xl">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon text-gray-400 hover:text-blue-500 text-lg sm:text-xl">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="social-icon text-gray-400 hover:text-blue-500 text-lg sm:text-xl">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" class="social-icon text-gray-400 hover:text-blue-500 text-lg sm:text-xl">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 right-0 left-16 sm:left-20 bg-black bg-opacity-95 backdrop-blur-sm z-40 p-4 sm:p-6">
+        <div class="flex justify-between items-center">
+            <div class="text-xl sm:text-2xl font-bold text-gray-500">JD</div>
+            
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav flex space-x-6 lg:space-x-8">
+                <a href="#" onclick="showPage('home')" class="nav-link home-link text-gray-500 hover:text-gray-400 transition-colors duration-300">Home</a>
+                <a href="#" onclick="showPage('about')" class="nav-link about-link text-gray-300 hover:text-gray-500 transition-colors duration-300">About</a>
+                <a href="#" onclick="showPage('complete')" class="nav-link complete-link text-gray-300 hover:text-gray-500 transition-colors duration-300">Projects</a>
+                <a href="#" onclick="showPage('ongoing')" class="nav-link ongoing-link text-gray-300 hover:text-gray-500 transition-colors duration-300">Ongoing</a>
+                <a href="#" onclick="showPage('contact')" class="nav-link contact-link text-gray-300 hover:text-gray-500 transition-colors duration-300">Contact</a>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <div class="hamburger" onclick="toggleMobileNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#" onclick="showPage('home'); toggleMobileNav()" class="nav-link home-link text-2xl sm:text-3xl text-gray-500 hover:text-gray-400 transition-colors duration-300">Home</a>
+            <a href="#" onclick="showPage('about'); toggleMobileNav()" class="nav-link about-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">About</a>
+            <a href="#" onclick="showPage('complete'); toggleMobileNav()" class="nav-link complete-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">Projects</a>
+            <a href="#" onclick="showPage('ongoing'); toggleMobileNav()" class="nav-link ongoing-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">Ongoing</a>
+            <a href="#" onclick="showPage('contact'); toggleMobileNav()" class="nav-link contact-link text-2xl sm:text-3xl text-gray-300 hover:text-gray-500 transition-colors duration-300">Contact</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content ml-16 sm:ml-20 pt-16 sm:pt-24 min-h-screen">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-4xl w-full">
+                    <h1 class="text-responsive-xl font-bold mb-4 sm:mb-6 leading-tight">
+                        I'm <span class="text-gray-500">John Doe</span>
+                    </h1>
+                    <h2 class="text-responsive-lg text-gray-400 mb-6 sm:mb-8">
+                        I love <span id="typing-text" class="typing-animation text-gray-500"></span>
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
+                        <button onclick="showPage('complete')" class="bg-gray-600 hover:bg-gray-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            My Portfolio
+                        </button>
+                        <button onclick="showPage('contact')" class="border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Contact Me
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-8">
+                <div class="max-w-4xl w-full">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">About <span class="text-gray-500">Me</span></h1>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div class="order-2 lg:order-1">
+                            <div class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-gray-500 to-gray-700 rounded-full mx-auto mb-6 sm:mb-8 flex items-center justify-center">
+                                <i class="fas fa-user text-4xl sm:text-6xl lg:text-8xl text-white"></i>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2">
+                            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-gray-400">Hello, I'm John Doe</h2>
+                            <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
+                                I'm a passionate developer with over 5 years of experience in creating digital solutions. I specialize in web development, mobile applications, and user experience design.
+                            </p>
+                            <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+                                My journey in technology started with a curiosity about how things work, and it has evolved into a career dedicated to building innovative applications.
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <h3 class="text-gray-400 font-semibold mb-2">Frontend</h3>
+                                    <p class="text-gray-300 text-sm">React, Vue, JavaScript</p>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <h3 class="text-gray-400 font-semibold mb-2">Backend</h3>
+                                    <p class="text-gray-300 text-sm">Node.js, Python, PHP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Projects Page -->
+        <div id="complete" class="page">
+            <div class="px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-16 text-center">Complete <span class="text-gray-500">Projects</span></h1>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('ecommerce')">
+                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-3xl sm:text-6xl text-white"></i>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">E-Commerce Platform</h3>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">A full-stack e-commerce solution with payment integration and admin dashboard.</p>
+                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('banking')">
+                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-3xl sm:text-6xl text-white"></i>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Mobile Banking App</h3>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Secure mobile banking application with biometric authentication.</p>
+                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('analytics')">
+                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-3xl sm:text-6xl text-white"></i>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Analytics Dashboard</h3>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Real-time analytics dashboard with interactive charts and reports.</p>
+                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('gaming')">
+                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+                            <i class="fas fa-gamepad text-3xl sm:text-6xl text-white"></i>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Gaming Platform</h3>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Multiplayer gaming platform with real-time chat and tournaments.</p>
+                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('learning')">
+                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-3xl sm:text-6xl text-white"></i>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Learning Management</h3>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Online learning platform with video streaming and progress tracking.</p>
+                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden cursor-pointer" onclick="openProjectModal('sustainability')">
+                        <div class="h-32 sm:h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center">
+                            <i class="fas fa-leaf text-3xl sm:text-6xl text-white"></i>
+                        </div>
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-400">Sustainability Tracker</h3>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Environmental impact tracking app with carbon footprint calculator.</p>
+                            <span class="text-gray-500 hover:text-gray-400 font-semibold text-sm sm:text-base">View Project →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ongoing Projects Page -->
+        <div id="ongoing" class="page">
+            <div class="px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-16 text-center">Ongoing <span class="text-gray-500">Projects</span></h1>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-6 sm:space-y-8">
+                        <div class="bg-gray-800 rounded-lg p-4 sm:p-6 border-l-4 border-gray-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-gray-400 mb-2 sm:mb-0">AI-Powered Chatbot</h3>
+                                <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm self-start">75% Complete</span>
+                            </div>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Developing an intelligent chatbot using natural language processing for customer service automation.</p>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gray-600 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-2">Expected completion: March 2024</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 rounded-lg p-4 sm:p-6 border-l-4 border-gray-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-gray-400 mb-2 sm:mb-0">Blockchain Voting System</h3>
+                                <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm self-start">45% Complete</span>
+                            </div>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Building a secure and transparent voting system using blockchain technology.</p>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gray-600 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-2">Expected completion: May 2024</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 rounded-lg p-4 sm:p-6 border-l-4 border-gray-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-gray-400 mb-2 sm:mb-0">VR Training Platform</h3>
+                                <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm self-start">30% Complete</span>
+                            </div>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Creating immersive VR training experiences for medical professionals.</p>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gray-600 h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-2">Expected completion: August 2024</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 rounded-lg p-4 sm:p-6 border-l-4 border-gray-500">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-gray-400 mb-2 sm:mb-0">IoT Smart Home Hub</h3>
+                                <span class="bg-gray-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm self-start">60% Complete</span>
+                            </div>
+                            <p class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">Developing a central hub for managing all smart home devices with voice control.</p>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gray-600 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-2">Expected completion: April 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <div class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-8">
+                <div class="max-w-2xl w-full">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center">Get In <span class="text-gray-500">Touch</span></h1>
+                    <div class="bg-gray-800 rounded-lg p-4 sm:p-6 lg:p-8">
+                        <form id="contactForm" onsubmit="handleSubmit(event)">
+                            <div class="mb-4 sm:mb-6">
+                                <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base">
+                            </div>
+                            
+                            <div class="mb-4 sm:mb-6">
+                                <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 text-sm sm:text-base">
+                            </div>
+                            
+                            <div class="mb-4 sm:mb-6">
+                                <label for="message" class="block text-gray-300 text-sm font-semibold mb-2">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-300 resize-none text-sm sm:text-base"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                                Send Message
+                            </button>
+                        </form>
+                        
+                        <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-700">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
+                                <div class="mb-4 sm:mb-0">
+                                    <i class="fas fa-envelope text-xl sm:text-2xl text-gray-500 mb-2"></i>
+                                    <p class="text-gray-300 text-sm sm:text-base">john@example.com</p>
+                                </div>
+                                <div class="mb-4 sm:mb-0">
+                                    <i class="fas fa-phone text-xl sm:text-2xl text-gray-500 mb-2"></i>
+                                    <p class="text-gray-300 text-sm sm:text-base">+1 (555) 123-4567</p>
+                                </div>
+                                <div>
+                                    <i class="fas fa-map-marker-alt text-xl sm:text-2xl text-gray-500 mb-2"></i>
+                                    <p class="text-gray-300 text-sm sm:text-base">New York, NY</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="text-2xl sm:text-3xl font-bold text-gray-300 mb-2"></h2>
+                <p id="modalSubtitle" class="text-gray-400 text-sm sm:text-base"></p>
+                <span class="close" onclick="closeProjectModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Typing animation
+        const phrases = ['coding', 'designing', 'creating', 'innovating'];
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            const typingElement = document.getElementById('typing-text');
+            if (!typingElement) return;
+            
+            const current = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                typingElement.textContent = current.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typingElement.textContent = current.substring(0, currentChar + 1);
+                currentChar++;
+            }
+            
+            let typeSpeed = isDeleting ? 100 : 150;
+            
+            if (!isDeleting && currentChar === current.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(typeWriter, typeSpeed);
+        }
+        
+        // Start typing animation
+        typeWriter();
+        
+        // Page navigation
+        let currentPage = 'home';
+        
+        function showPage(pageId) {
+            const currentPageElement = document.getElementById(currentPage);
+            const newPageElement = document.getElementById(pageId);
+            
+            if (currentPage === pageId) return;
+            
+            // Add exit animation
+            currentPageElement.classList.add('slide-exit-active');
+            
+            setTimeout(() => {
+                currentPageElement.classList.remove('active', 'slide-exit-active');
+                newPageElement.classList.add('active', 'slide-enter');
+                
+                setTimeout(() => {
+                    newPageElement.classList.add('slide-enter-active');
+                    newPageElement.classList.remove('slide-enter');
+                }, 10);
+                
+                currentPage = pageId;
+            }, 250);
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-gray-500', 'text-gray-400');
+                link.classList.add('text-gray-300');
+            });
+            
+            // Set active link
+            const activeLinks = document.querySelectorAll(`.${pageId}-link`);
+            activeLinks.forEach(link => {
+                link.classList.remove('text-gray-300');
+                link.classList.add('text-gray-500');
+            });
+        }
+        
+        // Mobile navigation
+        function toggleMobileNav() {
+            const mobileNav = document.querySelector('.mobile-nav');
+            const hamburger = document.querySelector('.hamburger');
+            
+            mobileNav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+        
+        // Contact form handling
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            
+            // Simulate form submission
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon.`);
+                form.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }, 2000);
+        }
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.querySelector('.mobile-nav');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !hamburger.contains(event.target)) {
+                toggleMobileNav();
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                const mobileNav = document.querySelector('.mobile-nav');
+                const hamburger = document.querySelector('.hamburger');
+                
+                mobileNav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+        
+        // Project Modal Functions
+        const projectData = {
+            ecommerce: {
+                title: "E-Commerce Platform",
+                subtitle: "Full-Stack Web Application • 2023",
+                description: "A comprehensive e-commerce solution built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment processing, and admin dashboard.",
+                technologies: ["React", "Node.js", "MongoDB", "Stripe API", "JWT", "Tailwind CSS"],
+                features: [
+                    "User registration and authentication",
+                    "Product catalog with search and filters",
+                    "Shopping cart and wishlist functionality",
+                    "Secure payment processing with Stripe",
+                    "Order tracking and history",
+                    "Admin dashboard for inventory management",
+                    "Responsive design for all devices",
+                    "Email notifications for orders"
+                ],
+                challenges: "Implementing secure payment processing and creating an intuitive admin interface for inventory management.",
+                outcome: "Successfully deployed with 99.9% uptime, handling 1000+ daily transactions with positive user feedback."
+            },
+            banking: {
+                title: "Mobile Banking App",
+                subtitle: "React Native Application • 2023",
+                description: "A secure mobile banking application with biometric authentication, real-time transactions, and comprehensive financial management tools.",
+                technologies: ["React Native", "Firebase", "Biometric API", "Redux", "Node.js", "PostgreSQL"],
+                features: [
+                    "Biometric authentication (fingerprint/face)",
+                    "Real-time balance and transaction updates",
+                    "Money transfer between accounts",
+                    "Bill payment and scheduling",
+                    "Transaction history and analytics",
+                    "Push notifications for activities",
+                    "Offline mode for basic features",
+                    "Multi-language support"
+                ],
+                challenges: "Ensuring bank-level security while maintaining user-friendly interface and implementing biometric authentication across different devices.",
+                outcome: "Achieved 4.8/5 app store rating with 50,000+ downloads and zero security incidents reported."
+            },
+            analytics: {
+                title: "Analytics Dashboard",
+                subtitle: "Data Visualization Platform • 2023",
+                description: "A real-time analytics dashboard providing interactive charts, reports, and insights for business intelligence and data-driven decision making.",
+                technologies: ["Vue.js", "D3.js", "Chart.js", "Python", "FastAPI", "Redis", "WebSocket"],
+                features: [
+                    "Real-time data visualization",
+                    "Interactive charts and graphs",
+                    "Custom report generation",
+                    "Data filtering and segmentation",
+                    "Export functionality (PDF, Excel)",
+                    "User role-based access control",
+                    "Automated alert system",
+                    "Mobile-responsive design"
+                ],
+                challenges: "Processing large datasets in real-time while maintaining smooth user experience and creating intuitive data visualizations.",
+                outcome: "Reduced report generation time by 80% and improved decision-making speed for 200+ business users."
+            },
+            gaming: {
+                title: "Gaming Platform",
+                subtitle: "Multiplayer Web Application • 2023",
+                description: "A comprehensive gaming platform featuring multiplayer games, real-time chat, tournaments, and social features for gaming communities.",
+                technologies: ["Socket.io", "Express.js", "MongoDB", "WebRTC", "Canvas API", "JWT"],
+                features: [
+                    "Real-time multiplayer gameplay",
+                    "Live chat and voice communication",
+                    "Tournament creation and management",
+                    "Player ranking and leaderboards",
+                    "Friend system and social features",
+                    "Game replay and statistics",
+                    "Custom game rooms",
+                    "Anti-cheat detection system"
+                ],
+                challenges: "Implementing low-latency real-time communication for smooth gameplay and preventing cheating in competitive matches.",
+                outcome: "Hosted 100+ tournaments with 10,000+ registered players and 95% positive community feedback."
+            },
+            learning: {
+                title: "Learning Management System",
+                subtitle: "Educational Platform • 2023",
+                description: "An online learning platform with video streaming, progress tracking, interactive quizzes, and comprehensive course management tools.",
+                technologies: ["Next.js", "Prisma", "PostgreSQL", "AWS S3", "Stripe", "WebRTC"],
+                features: [
+                    "HD video streaming with adaptive quality",
+                    "Interactive quizzes and assignments",
+                    "Progress tracking and analytics",
+                    "Live virtual classrooms",
+                    "Course creation tools for instructors",
+                    "Certificate generation",
+                    "Discussion forums and Q&A",
+                    "Mobile app companion"
+                ],
+                challenges: "Optimizing video streaming for different connection speeds and creating engaging interactive learning experiences.",
+                outcome: "Served 5,000+ students across 50+ courses with 92% completion rate and excellent instructor feedback."
+            },
+            sustainability: {
+                title: "Sustainability Tracker",
+                subtitle: "Environmental Impact App • 2023",
+                description: "An environmental impact tracking application with carbon footprint calculator, sustainability goals, and community challenges.",
+                technologies: ["Flutter", "Firebase", "Google Maps API", "Chart.js", "Node.js", "MongoDB"],
+                features: [
+                    "Carbon footprint calculation",
+                    "Daily sustainability tracking",
+                    "Eco-friendly habit suggestions",
+                    "Community challenges and rewards",
+                    "Local environmental data integration",
+                    "Progress visualization and reports",
+                    "Social sharing and competitions",
+                    "Educational content and tips"
+                ],
+                challenges: "Accurately calculating carbon footprints from various activities and motivating users to maintain sustainable habits.",
+                outcome: "Helped 25,000+ users reduce their carbon footprint by an average of 30% within 6 months of usage."
+            }
+        };
+        
+        function openProjectModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const project = projectData[projectId];
+            
+            if (!project) return;
+            
+            // Set modal content
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalSubtitle').textContent = project.subtitle;
+            
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-3">Project Overview</h3>
+                        <p class="text-gray-400 leading-relaxed">${project.description}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-3">Technologies Used</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-3">Key Features</h3>
+                        <div class="space-y-2">
+                            ${project.features.map(feature => `
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>${feature}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-3">Challenges & Solutions</h3>
+                        <p class="text-gray-400 leading-relaxed">${project.challenges}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-3">Results & Impact</h3>
+                        <p class="text-gray-400 leading-relaxed">${project.outcome}</p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                        <button class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Live Demo
+                        </button>
+                        <button class="border border-gray-600 text-gray-300 hover:bg-gray-600 hover:text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center">
+                            <i class="fab fa-github mr-2"></i>
+                            View Code
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('projectModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeProjectModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeProjectModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97931f339406959b',t:'MTc1Njg4MDIyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
