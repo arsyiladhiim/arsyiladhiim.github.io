@@ -1,5 +1,5 @@
 // Ganti dengan Public Key Anda
-  emailjs.init("YOUR_PUBLIC_KEY");
+  emailjs.init("gZk7BMAEqFKGuUPY1");
 
   function showToast(message, type = "success") {
     const container = document.getElementById("toastContainer");
@@ -29,7 +29,7 @@
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+    emailjs.sendForm("service_16qlifl", "template_rmalcj6", this)
       .then(() => {
         showToast("✅ Message sent successfully!", "success");
         this.reset();
